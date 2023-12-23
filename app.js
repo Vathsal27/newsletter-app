@@ -8,10 +8,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("resources"))
 
 app.get('/', (req, res)=>{
-    res.sendFile(__dirname + '/signup.html');
+    res.sendFile(__dirname + '/resources/html/signup.html');
 });
 
 app.post('/', (req, res)=>{
+    console.log(req.body);
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
@@ -30,17 +31,19 @@ app.post('/', (req, res)=>{
     };
     const options = {
         method: "POST",
-        auth: "vathsal:97111522e16a4d8404e49574039e1fa6-us13"
+        auth: "vathsal:843fe063e6e8a69fb061d5ddf31fc9d7-us13"
 
     }
     const jsonData = JSON.stringify(data);
     const request = https.request(url, options, (response)=>{
         response.on("data", (d)=>{
             console.log(JSON.parse(d));
-            if(d.error_count == 0)
-                res.sendFile(__dirname + '/success.html');
-            else
-                res.sendFile(__dirname + '/failure.html');
+            if(d.total_created != 0){
+                res.sendFile(__dirname + '/resources/html/success.html');
+            }
+            else{
+                res.sendFile(__dirname + '/resources/html/failure.html');
+            }
 
         });
     });
@@ -51,9 +54,3 @@ app.post('/', (req, res)=>{
 app.listen(3000, ()=>{
     console.log("Server online on port 3000");
 });
-
-// API Key
-// 97111522e16a4d8404e49574039e1fa6-us13
-
-// Audience ID
-// 4359644686
