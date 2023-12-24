@@ -31,24 +31,28 @@ app.post('/', (req, res)=>{
     };
     const options = {
         method: "POST",
-        auth: "vathsal:d0c3c4742f53caa4d1b596898f09ffb3-us13"
+        auth: "vathsal:ef2eb5227e07aebef6af94e7f745e1da-us13"
 
     }
     const jsonData = JSON.stringify(data);
     const request = https.request(url, options, (response)=>{
         response.on("data", (d)=>{
             console.log(JSON.parse(d));
-            if(d.total_created != 0){
-                res.sendFile(__dirname + '/resources/html/success.html');
-            }
-            else{
-                res.sendFile(__dirname + '/resources/html/failure.html');
-            }
-
         });
+        if(response.statusCode === 200)
+        {
+            res.sendFile(__dirname + "/resources/html/success.html");
+        }
+        else{
+            res.sendFile(__dirname + "/resources/html/failed.html");
+        }
     });
     request.write(jsonData);
     request.end();
+});
+
+app.post('/failed', (req, res)=>{
+    res.redirect('/');
 });
 
 app.listen(3000, ()=>{
