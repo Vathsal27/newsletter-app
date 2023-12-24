@@ -31,7 +31,7 @@ app.post('/', (req, res)=>{
     };
     const options = {
         method: "POST",
-        auth: "vathsal:843fe063e6e8a69fb061d5ddf31fc9d7-us13"
+        auth: "vathsal:d0c3c4742f53caa4d1b596898f09ffb3-us13"
 
     }
     const jsonData = JSON.stringify(data);
