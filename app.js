@@ -5,7 +5,7 @@ const https = require('https');
 app.use(bodyParser.urlencoded({extended: true}));
 
 // to load static files like css and images
-app.use(express.static("resources"))
+app.use(express.static("resources"));
 
 app.get('/', (req, res)=>{
     res.sendFile(__dirname + '/resources/html/signup.html');
@@ -31,8 +31,7 @@ app.post('/', (req, res)=>{
     };
     const options = {
         method: "POST",
-        auth: "vathsal:ef2eb5227e07aebef6af94e7f745e1da-us13"
-
+        auth: "vathsal:aeff4d9e6e42184e7af533d95806e6c59-us13"
     }
     const jsonData = JSON.stringify(data);
     const request = https.request(url, options, (response)=>{
